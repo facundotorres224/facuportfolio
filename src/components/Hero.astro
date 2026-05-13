@@ -20,7 +20,7 @@ import { Icon } from "astro-icon/components";
 
       <h1 class="hero-title">
         <span class="hero-greeting"><span data-i18n="hero.greeting">Hola, soy</span></span>
-        <span class="hero-name" data-i18n="hero.name">Mateo</span>
+        <span class="hero-name" data-i18n="hero.name">Facundo</span>
         <span class="hero-role-wrapper">
           <span class="hero-role-static">&lt;</span>
           <span class="hero-role" id="typewriter"></span>
@@ -30,7 +30,7 @@ import { Icon } from "astro-icon/components";
       </h1>
 
       <p class="hero-desc" data-i18n="hero.desc">
-        Creo aplicaciones web y páginas web modernas con tecnologías de vanguardia. Transformo ideas en experiencias digitales.
+        Desarrollo aplicaciones web y páginas modernas que convierten ideas en experiencias digitales únicas.
       </p>
 
       <div class="hero-actions">
@@ -506,10 +506,30 @@ import { Icon } from "astro-icon/components";
   }
 
   @media (max-width: 480px) {
+    .hero {
+      padding: 120px 0 80px;
+    }
     .hero-visual {
       min-height: 240px;
     }
-    .t-3 { display: none; }
+    .hero-name {
+      letter-spacing: -1px;
+    }
+    .hero-desc {
+      line-height: 1.6;
+    }
+    .hero-actions {
+      flex-direction: column;
+    }
+    .hero-actions .btn-primary,
+    .hero-actions .btn-ghost {
+      width: 100%;
+      justify-content: center;
+    }
+    .t-1, .t-2, .t-4 { display: none; }
+    .hero-code-card {
+      padding: 16px;
+    }
   }
 </style>
 

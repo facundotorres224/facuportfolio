@@ -298,3 +298,21 @@ img {
     padding: 80px 0;
   }
 }
+
+@media (max-width: 480px) {
+  .section {
+    padding: 50px 0;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  .reveal {
+    transform: translateY(20px);
+  }
+  .reveal-left {
+    transform: translateX(-20px);
+  }
+  .reveal-right {
+    transform: translateX(20px);
+  }
+}

@@ -30,6 +30,7 @@ const navLinks = [
       ))}
       <div class="nav-indicator" id="navIndicator"></div>
     </ul>
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <div class="nav-controls">
       <div class="lang-toggle" id="langToggle">
@@ -200,6 +201,10 @@ const navLinks = [
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
+  .nav-overlay {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     .nav-links {
       position: fixed;
@@ -222,6 +227,22 @@ const navLinks = [
       right: 0;
     }
 
+    .nav-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .nav-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .nav-link {
       padding: 14px 20px;
       font-size: 1rem;
@@ -239,6 +260,13 @@ const navLinks = [
 
     .menu-btn {
       display: flex;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .nav-links {
+      width: 100%;
+      border-left: none;
     }
   }
 </style>
@@ -295,16 +323,24 @@ const navLinks = [
     if (window.innerWidth > 768) moveIndicator(activeIndex);
   });
 
+  const navOverlay = document.getElementById("navOverlay");
+
+  function toggleMenu(open) {
+    menuBtn?.classList.toggle("active", open);
+    navLinks?.classList.toggle("open", open);
+    navOverlay?.classList.toggle("show", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
   menuBtn?.addEventListener("click", () => {
-    menuBtn.classList.toggle("active");
-    navLinks?.classList.toggle("open");
+    const isOpen = navLinks?.classList.contains("open");
+    toggleMenu(!isOpen);
   });
 
+  navOverlay?.addEventListener("click", () => toggleMenu(false));
+
   links.forEach((link) => {
-    link.addEventListener("click", () => {
-      menuBtn?.classList.remove("active");
-      navLinks?.classList.remove("open");
-    });
+    link.addEventListener("click", () => toggleMenu(false));
   });
 
   // Theme toggle
