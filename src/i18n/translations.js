@@ -48,8 +48,8 @@ const translations = {
     "skills.desc": "Tecnologías con las que trabajo día a día para construir soluciones web modernas y escalables.",
     "skills.cat.0": "Frontend",
     "skills.cat.1": "Backend",
-    "skills.cat.2": "Bases de Datos",
-    "skills.cat.3": "DevOps & Herramientas",
+    "skills.cat.2": "Base de Datos",
+    "skills.cat.3": "Otros",
 
     "contact.tag": "Contacto",
     "contact.title": "¿Hablamos de tu",
@@ -165,8 +165,8 @@ const translations = {
     "skills.desc": "Technologies I work with daily to build modern and scalable web solutions.",
     "skills.cat.0": "Frontend",
     "skills.cat.1": "Backend",
-    "skills.cat.2": "Databases",
-    "skills.cat.3": "DevOps & Tools",
+    "skills.cat.2": "Database",
+    "skills.cat.3": "Others",
 
     "contact.tag": "Contact",
     "contact.title": "Let's talk about your",
