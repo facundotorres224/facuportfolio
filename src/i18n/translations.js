@@ -71,6 +71,7 @@ const translations = {
     "contact.form.message.placeholder": "Cuéntame sobre tu proyecto...",
     "contact.form.btn": "Enviar mensaje",
     "contact.form.sent": "¡Enviado!",
+    "contact.form.sending": "Enviando...",
 
     "about.tag": "Sobre mí",
     "about.title": "Conoce más",
@@ -188,6 +189,7 @@ const translations = {
     "contact.form.message.placeholder": "Tell me about your project...",
     "contact.form.btn": "Send message",
     "contact.form.sent": "Sent!",
+    "contact.form.sending": "Sending...",
 
     "about.tag": "About me",
     "about.title": "Get to know",

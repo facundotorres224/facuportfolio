@@ -56,7 +56,10 @@ const contactMethods = [
         </div>
       </div>
 
-      <form class="contact-form reveal-right" id="contactForm" data-netlify="true">
+      <form class="contact-form reveal-right" id="contactForm" action="https://formsubmit.co/fylstudiosoficial@gmail.com" method="POST">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <div class="form-header">
           <h3 class="form-title" data-i18n="contact.form.title">Envíame un mensaje</h3>
           <p class="form-sub" data-i18n="contact.form.sub">Completa el formulario y te responderé pronto.</p>
@@ -85,11 +88,12 @@ const contactMethods = [
               <textarea id="message" name="message" class="form-input form-textarea" data-i18n-placeholder="contact.form.message.placeholder" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
             </div>
           </div>
-          <button type="submit" class="btn-primary form-btn">
+          <button type="submit" class="btn-primary form-btn" id="formSubmitBtn">
             <span data-i18n="contact.form.btn">Enviar mensaje</span>
             <Icon name="lucide:send" class="btn-icon" />
           </button>
         </div>
+        <div class="form-status" id="formStatus"></div>
       </form>
     </div>
   </div>
@@ -293,6 +297,34 @@ const contactMethods = [
     cursor: pointer;
   }
 
+  .form-btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .form-status {
+    margin: 0 32px 24px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: none;
+  }
+
+  .form-status.success {
+    display: block;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .form-status.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+
   @media (max-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr;
@@ -311,19 +343,43 @@ const contactMethods = [
 </style>
 
 <script>
-  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+  document.getElementById("contactForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const btn = e.target.querySelector(".form-btn");
+    const form = e.target;
+    const btn = document.getElementById("formSubmitBtn");
+    const status = document.getElementById("formStatus");
     const lang = document.documentElement.getAttribute("data-lang") || "es";
-    const sentText = window.translations?.[lang]?.["contact.form.sent"] || "¡Enviado!";
-    const origBtn = btn.innerHTML;
-    btn.innerHTML = `<span>${sentText}</span>`;
-    btn.style.pointerEvents = "none";
-    btn.style.opacity = "0.7";
+    const t = (key) => window.translations?.[lang]?.[key] || key;
+
+    const sendingText = t("contact.form.sending");
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = `<span>${sendingText}</span>`;
+    btn.classList.add("loading");
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/fylstudiosoficial@gmail.com", {
+        method: "POST",
+        body: data,
+      });
+
+      if (res.ok) {
+        status.textContent = t("contact.form.sent");
+        status.className = "form-status success";
+        form.reset();
+      } else {
+        throw new Error("Send failed");
+      }
+    } catch {
+      status.textContent = "Error al enviar. Intenta de nuevo.";
+      status.className = "form-status error";
+    }
+
+    btn.classList.remove("loading");
+    btn.innerHTML = origHTML;
     setTimeout(() => {
-      btn.innerHTML = origBtn;
-      btn.style.pointerEvents = "auto";
-      btn.style.opacity = "1";
-    }, 3000);
+      status.style.display = "none";
+    }, 5000);
   });
 </script>
