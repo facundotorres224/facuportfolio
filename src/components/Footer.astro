@@ -1,0 +1,149 @@
+---
+import { Icon } from "astro-icon/components";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-text">Dev</span>
+          <span class="logo-bracket"> /&gt;</span>
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Desarrollo web moderno &mdash; Frontend &amp; Backend</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/tuusuario" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+          <Icon name="lucide:github" />
+        </a>
+        <a href="https://linkedin.com/in/tuusuario" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <Icon name="lucide:linkedin" />
+        </a>
+        <a href="mailto:mateo@email.com" class="social-link" aria-label="Email">
+          <Icon name="lucide:mail" />
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; {year} Mateo. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+      <p class="footer-made">
+        <span data-i18n="footer.made">Hecho con</span> <span class="footer-heart">&#9829;</span>
+        <span data-i18n="footer.from">desde Argentina</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 0 32px;
+  }
+
+  .footer-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-brand .logo {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--overlay);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: var(--accent-1);
+    border-color: rgba(6, 182, 212, 0.2);
+    background: rgba(6, 182, 212, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .social-link :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .footer-made {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .footer-heart {
+    color: #ef4444;
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-brand {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

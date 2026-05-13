@@ -1,0 +1,355 @@
+---
+import { Icon } from "astro-icon/components";
+
+const navLinks = [
+  { href: "#inicio", label: "Inicio", icon: "lucide:home", key: "header.inicio" },
+  { href: "#sobremi", label: "Sobre mí", icon: "lucide:user", key: "header.sobremi" },
+  { href: "#servicios", label: "Servicios", icon: "lucide:sparkles", key: "header.servicios" },
+  { href: "#habilidades", label: "Habilidades", icon: "lucide:code-2", key: "header.habilidades" },
+  { href: "#proyectos", label: "Proyectos", icon: "lucide:folder-git-2", key: "header.proyectos" },
+  { href: "#contacto", label: "Contacto", icon: "lucide:send", key: "header.contacto" },
+];
+---
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="#" class="logo">
+      <span class="logo-bracket">&lt;</span>
+      <span class="logo-text">Dev</span>
+      <span class="logo-bracket"> /&gt;</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="nav-link" data-section={link.href.slice(1)}>
+            <Icon name={link.icon} class="nav-icon" />
+            <span data-i18n={link.key}>{link.label}</span>
+          </a>
+        </li>
+      ))}
+      <div class="nav-indicator" id="navIndicator"></div>
+    </ul>
+
+    <div class="nav-controls">
+      <div class="lang-toggle" id="langToggle">
+        <button class="lang-opt active" data-lang="es">ES</button>
+        <button class="lang-opt" data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <Icon name="lucide:sun" class="sun-icon" />
+        <Icon name="lucide:moon" class="moon-icon" />
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<style is:global>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: padding 0.4s ease, background 0.4s ease;
+  }
+
+  .header.scrolled {
+    padding: 12px 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border-bottom: 1px solid var(--overlay-border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .logo {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+  }
+
+  .logo-bracket {
+    color: var(--accent-1);
+    opacity: 0.6;
+    font-weight: 400;
+  }
+
+  .logo-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+    align-items: center;
+    position: relative;
+    padding: 4px;
+    background: var(--nav-pill-bg);
+    border: 1px solid var(--nav-pill-border);
+    border-radius: 50px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+  }
+
+  .nav-link.active {
+    color: var(--text);
+  }
+
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover .nav-icon {
+    transform: translateY(-1px);
+  }
+
+  .nav-indicator {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    height: calc(100% - 8px);
+    background: var(--nav-indicator-bg);
+    border: 1px solid var(--nav-indicator-border);
+    border-radius: 50px;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: var(--nav-pill-bg);
+    border: 1px solid var(--nav-pill-border);
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 12px 14px;
+    transition: background 0.3s ease;
+  }
+
+  .menu-btn:hover {
+    background: var(--overlay-hover);
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .menu-btn.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      flex-direction: column;
+      background: var(--bg);
+      border: none;
+      border-left: 1px solid var(--overlay-border);
+      padding: 100px 24px 40px;
+      gap: 4px;
+      border-radius: 0;
+      transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 100;
+    }
+
+    .nav-links.open {
+      right: 0;
+    }
+
+    .nav-link {
+      padding: 14px 20px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-indicator {
+      display: none;
+    }
+
+    .menu-btn {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("header");
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+  const indicator = document.getElementById("navIndicator");
+  const links = document.querySelectorAll(".nav-link");
+  const themeBtn = document.getElementById("themeToggle");
+  const langBtns = document.querySelectorAll(".lang-opt");
+
+  let activeIndex = 0;
+
+  function moveIndicator(index) {
+    if (!indicator || window.innerWidth <= 768) return;
+    const link = links[index];
+    if (!link) return;
+    const ul = navLinks;
+    const ulRect = ul.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    indicator.style.width = `${linkRect.width}px`;
+    indicator.style.transform = `translateX(${linkRect.left - ulRect.left - 4}px)`;
+  }
+
+  function updateActiveSection() {
+    const sections = ["inicio", "sobremi", "servicios", "proyectos", "habilidades", "contacto"];
+    let current = "inicio";
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.4) current = id;
+      }
+    });
+    links.forEach((link, i) => {
+      const section = link.dataset.section;
+      const isActive = section === current;
+      link.classList.toggle("active", isActive);
+      if (isActive) activeIndex = i;
+    });
+    if (current !== "inicio" || window.scrollY > 100) {
+      moveIndicator(activeIndex);
+    }
+  }
+
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 60);
+    updateActiveSection();
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) moveIndicator(activeIndex);
+  });
+
+  menuBtn?.addEventListener("click", () => {
+    menuBtn.classList.toggle("active");
+    navLinks?.classList.toggle("open");
+  });
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      menuBtn?.classList.remove("active");
+      navLinks?.classList.remove("open");
+    });
+  });
+
+  // Theme toggle
+  const storedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", storedTheme);
+
+  themeBtn?.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  // Language toggle
+  const storedLang = localStorage.getItem("lang") || "es";
+
+  function setLang(lang) {
+    langBtns.forEach((b) => b.classList.toggle("active", b.dataset.lang === lang));
+    document.documentElement.setAttribute("data-lang", lang);
+    localStorage.setItem("lang", lang);
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      const t = window.translations?.[lang]?.[key];
+      if (t !== undefined && el.tagName !== "INPUT" && el.tagName !== "TEXTAREA") {
+        el.textContent = t;
+      }
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.dataset.i18nPlaceholder;
+      const t = window.translations?.[lang]?.[key];
+      if (t !== undefined) el.placeholder = t;
+    });
+
+    const roles = window.translations?.[lang]?.["hero.roles"];
+    if (roles && window.typewriterRoles) {
+      window.typewriterRoles = roles;
+    }
+  }
+
+  langBtns.forEach((btn) => {
+    btn.addEventListener("click", () => setLang(btn.dataset.lang));
+  });
+
+  setLang(storedLang);
+
+  setTimeout(() => updateActiveSection(), 100);
+</script>

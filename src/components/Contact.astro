@@ -1,0 +1,329 @@
+---
+import { Icon } from "astro-icon/components";
+
+const contactMethods = [
+  {
+    icon: "lucide:mail",
+    label: "Email",
+    value: "mateo@email.com",
+    href: "mailto:mateo@email.com",
+    key: "contact.email",
+  },
+  {
+    icon: "lucide:github",
+    label: "GitHub",
+    value: "github.com/tuusuario",
+    href: "https://github.com/tuusuario",
+    key: "contact.github",
+  },
+  {
+    icon: "lucide:linkedin",
+    label: "LinkedIn",
+    value: "linkedin.com/in/tuusuario",
+    href: "https://linkedin.com/in/tuusuario",
+    key: "contact.linkedin",
+  },
+];
+---
+
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info-side reveal-left">
+        <span class="sec-tag" data-i18n="contact.tag" style="border-color: rgba(244,114,182,0.12); color: #f472b6; background: rgba(244,114,182,0.08);">Contacto</span>
+        <h2 class="sec-title">
+          <span data-i18n="contact.title">¿Hablamos de tu</span><br />
+          <span class="gradient-text" data-i18n="contact.title.highlight" style="background: linear-gradient(135deg, #f472b6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">próximo proyecto</span>?
+        </h2>
+        <p class="sec-desc" style="margin-bottom: 40px;" data-i18n="contact.desc">
+          Estoy abierto a freelances, colaboraciones y oportunidades laborales.
+          Respondo en máximo 24 horas.
+        </p>
+
+        <div class="contact-cards stagger">
+          {contactMethods.map((m) => (
+            <a href={m.href} class="contact-card" target="_blank" rel="noopener noreferrer">
+              <div class="contact-card-icon">
+                <Icon name={m.icon} />
+              </div>
+              <div class="contact-card-body">
+                <span class="contact-card-label" data-i18n={`${m.key}.label`}>{m.label}</span>
+                <span class="contact-card-value" data-i18n={`${m.key}.value`}>{m.value}</span>
+              </div>
+              <Icon name="lucide:external-link" class="contact-card-ext" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <form class="contact-form reveal-right" id="contactForm" data-netlify="true">
+        <div class="form-header">
+          <h3 class="form-title" data-i18n="contact.form.title">Envíame un mensaje</h3>
+          <p class="form-sub" data-i18n="contact.form.sub">Completa el formulario y te responderé pronto.</p>
+        </div>
+        <div class="form-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label" data-i18n="contact.form.name">Nombre</label>
+              <div class="input-wrap">
+                <Icon name="lucide:user" class="input-icon" />
+                <input type="text" id="name" name="name" class="form-input" data-i18n-placeholder="contact.form.name.placeholder" placeholder="Tu nombre" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label" data-i18n="contact.form.email">Email</label>
+              <div class="input-wrap">
+                <Icon name="lucide:mail" class="input-icon" />
+                <input type="email" id="email" name="email" class="form-input" data-i18n-placeholder="contact.form.email.placeholder" placeholder="tu@email.com" required />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label" data-i18n="contact.form.message">Mensaje</label>
+            <div class="input-wrap">
+              <Icon name="lucide:message-square" class="input-icon textarea-icon" />
+              <textarea id="message" name="message" class="form-input form-textarea" data-i18n-placeholder="contact.form.message.placeholder" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary form-btn">
+            <span data-i18n="contact.form.btn">Enviar mensaje</span>
+            <Icon name="lucide:send" class="btn-icon" />
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover {
+    border-color: var(--overlay-border-hover);
+    transform: translateX(4px);
+  }
+
+  .contact-card-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--overlay);
+    border: 1px solid var(--overlay-border);
+    border-radius: 12px;
+    color: var(--accent-1);
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover .contact-card-icon {
+    background: rgba(6, 182, 212, 0.08);
+    border-color: rgba(6, 182, 212, 0.15);
+  }
+
+  .contact-card-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact-card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .contact-card-value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .contact-card-ext {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    opacity: 0.4;
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover .contact-card-ext {
+    opacity: 1;
+    color: var(--accent-1);
+  }
+
+  .contact-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .form-header {
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .form-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .form-body {
+    padding: 24px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color 0.3s ease;
+  }
+
+  .input-wrap:focus-within .input-icon {
+    color: var(--accent-1);
+  }
+
+  .textarea-icon {
+    top: 16px;
+    transform: none;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 13px 14px 13px 42px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.08);
+  }
+
+  .form-input::placeholder {
+    color: var(--placeholder);
+  }
+
+  .form-textarea {
+    min-height: 130px;
+    resize: vertical;
+    padding-top: 14px;
+  }
+
+  .form-btn {
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .form-header, .form-body {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector(".form-btn");
+    const lang = document.documentElement.getAttribute("data-lang") || "es";
+    const sentText = window.translations?.[lang]?.["contact.form.sent"] || "¡Enviado!";
+    const origBtn = btn.innerHTML;
+    btn.innerHTML = `<span>${sentText}</span>`;
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.7";
+    setTimeout(() => {
+      btn.innerHTML = origBtn;
+      btn.style.pointerEvents = "auto";
+      btn.style.opacity = "1";
+    }, 3000);
+  });
+</script>

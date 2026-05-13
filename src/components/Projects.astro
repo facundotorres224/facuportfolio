@@ -1,0 +1,250 @@
+---
+import { Icon } from "astro-icon/components";
+
+const projects = [
+  {
+    icon: "lucide:shopping-cart",
+    gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
+    demo: "#",
+    github: "#",
+  },
+  {
+    icon: "lucide:bar-chart-3",
+    gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+    demo: "#",
+    github: "#",
+  },
+  {
+    icon: "lucide:check-square",
+    gradient: "linear-gradient(135deg, #f472b6, #ec4899)",
+    demo: "#",
+    github: "#",
+  },
+  {
+    icon: "lucide:layers",
+    gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
+    demo: "#",
+    github: "#",
+  },
+];
+---
+
+<section class="section" id="proyectos">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag" data-i18n="projects.tag" style="border-color: rgba(245,158,11,0.12); color: #f59e0b; background: rgba(245,158,11,0.08);">Proyectos</span>
+      <h2 class="sec-title">
+        <span data-i18n="projects.title">Algunos de mis</span><br />
+        <span class="gradient-text" data-i18n="projects.title.highlight" style="background: linear-gradient(135deg, #f59e0b, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">trabajos</span>
+      </h2>
+      <p class="sec-desc" data-i18n="projects.desc">
+        Proyectos reales que he construido aplicando las tecnologías que domino.
+      </p>
+    </div>
+
+    <div class="projects-track stagger">
+      {projects.map((p, i) => (
+        <article class="project-card">
+          <div class="project-visual" style="background: {p.gradient};">
+            <div class="project-visual-bg">
+              <div class="project-shape shape-1"></div>
+              <div class="project-shape shape-2"></div>
+            </div>
+            <div class="project-icon-wrap">
+              <Icon name={p.icon} />
+            </div>
+            <div class="project-links">
+              <a href={p.demo} class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Live demo">
+                <Icon name="lucide:external-link" />
+              </a>
+              <a href={p.github} class="project-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Icon name="lucide:github" />
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title" data-i18n={`projects.${i}.title`}>E-Commerce App</h3>
+            <p class="project-desc" data-i18n={`projects.${i}.desc`}>Descripción del proyecto</p>
+            <div class="project-tags" data-i18n-tags={`projects.${i}.tags`}>
+              {[
+                ["React", "Node.js", "MongoDB"],
+                ["Next.js", "Python", "PostgreSQL"],
+                ["Vue", "Django", "TailwindCSS"],
+                ["Express", "Docker", "JWT"],
+              ][i].map((tag) => (
+                <span class="project-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .projects-track {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+
+  .project-visual {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .project-visual-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+  }
+
+  .project-shape {
+    position: absolute;
+    border-radius: 50%;
+    animation: shapeFloat 8s ease-in-out infinite;
+  }
+
+  .shape-1 {
+    width: 120px; height: 120px;
+    background: white;
+    top: -20px; right: -20px;
+    opacity: 0.3;
+  }
+
+  .shape-2 {
+    width: 80px; height: 80px;
+    background: white;
+    bottom: -10px; left: -10px;
+    opacity: 0.2;
+    animation-delay: -4s;
+  }
+
+  @keyframes shapeFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10px, -10px) scale(1.1); }
+  }
+
+  .project-icon-wrap {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+    color: white;
+    z-index: 1;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover .project-icon-wrap {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  .project-icon-wrap :global(svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .project-links {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .project-links {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .project-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+  }
+
+  .project-link :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .project-body {
+    padding: 24px;
+  }
+
+  .project-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--accent-1);
+    background: rgba(6, 182, 212, 0.06);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+    padding: 3px 10px;
+    border-radius: 50px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-track {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

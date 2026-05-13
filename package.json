@@ -1,0 +1,29 @@
+{
+  "name": "porfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proyectosoficiales223/facuportafolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/proyectosoficiales223/facuportafolio/issues"
+  },
+  "homepage": "https://github.com/proyectosoficiales223/facuportafolio#readme",
+  "description": "",
+  "dependencies": {
+    "@astrojs/db": "^0.21.1",
+    "@iconify-json/lucide": "^1.2.107",
+    "@iconify-json/simple-icons": "^1.2.82",
+    "astro": "^6.3.1",
+    "astro-icon": "^1.1.5"
+  }
+}

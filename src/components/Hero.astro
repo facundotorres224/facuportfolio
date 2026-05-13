@@ -1,0 +1,577 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <div class="mesh-gradient"></div>
+    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="hero-layout container">
+    <div class="hero-main">
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        <span data-i18n="hero.tag">Disponible para proyectos</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-greeting"><span data-i18n="hero.greeting">Hola, soy</span></span>
+        <span class="hero-name" data-i18n="hero.name">Mateo</span>
+        <span class="hero-role-wrapper">
+          <span class="hero-role-static">&lt;</span>
+          <span class="hero-role" id="typewriter"></span>
+          <span class="hero-role-cursor" id="cursor">|</span>
+          <span class="hero-role-static"> /&gt;</span>
+        </span>
+      </h1>
+
+      <p class="hero-desc" data-i18n="hero.desc">
+        Creo aplicaciones web y páginas web modernas con tecnologías de vanguardia. Transformo ideas en experiencias digitales.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#servicios" class="btn-primary">
+          <span data-i18n="hero.btn.services">Ver servicios</span>
+          <Icon name="lucide:arrow-right" class="btn-icon" />
+        </a>
+        <a href="#contacto" class="btn-ghost">
+          <Icon name="lucide:message-circle" class="btn-icon" />
+          <span data-i18n="hero.btn.contact">Hablemos</span>
+        </a>
+      </div>
+
+      <div class="hero-marquee stagger" id="heroMarquee">
+        {["React", "Next.js", "Node.js", "Python", "TypeScript", "TailwindCSS", "Docker", "AWS"].map(
+          (tech) => (
+            <span class="marquee-item">{tech}</span>
+          )
+        )}
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-code-card">
+        <div class="code-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="code-content">
+          <span class="code-line" id="codeLine1"><span class="code-keyword">const</span> <span class="code-fn">crear</span> = <span class="code-paren">(</span><span class="code-param">idea</span><span class="code-paren">)</span> <span class="code-keyword">=></span> <span class="code-paren">{</span></span>
+          <span class="code-line indent" id="codeLine2"><span class="code-keyword">return</span> <span class="code-string">"experiencia digital"</span></span>
+          <span class="code-line" id="codeLine3"><span class="code-paren">}</span></span>
+        </div>
+      </div>
+      <div class="floating-tech t-1">
+        <Icon name="simple-icons:react" class="tech-icon" />
+      </div>
+      <div class="floating-tech t-2">
+        <Icon name="simple-icons:nodedotjs" class="tech-icon" />
+      </div>
+      <div class="floating-tech t-3">
+        <Icon name="simple-icons:tailwindcss" class="tech-icon" />
+      </div>
+      <div class="floating-tech t-4">
+        <Icon name="simple-icons:python" class="tech-icon" />
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span class="scroll-text" data-i18n="hero.scroll">Desliza</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style is:global>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 140px 0 100px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .mesh-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 0% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 60% at 100% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(244, 114, 182, 0.05) 0%, transparent 50%);
+    transition: opacity 0.4s ease;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--hero-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hero-grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.12), transparent);
+    top: -10%; left: -10%;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent);
+    bottom: -5%; right: 10%;
+    animation-delay: -7s;
+  }
+
+  .orb-3 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.08), transparent);
+    top: 40%; right: 30%;
+    animation-delay: -14s;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -30px) scale(1.1); }
+    50% { transform: translate(-20px, 20px) scale(0.95); }
+    75% { transform: translate(30px, 40px) scale(1.05); }
+  }
+
+  .hero-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--accent-1);
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .hero-tag-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+
+  .hero-greeting {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    opacity: 0.7;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -3px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: heroGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes heroGlow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+  }
+
+  .hero-role-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+
+  .hero-role-static {
+    color: var(--accent-1);
+    opacity: 0.5;
+  }
+
+  .hero-role {
+    color: var(--text);
+    min-width: 2ch;
+  }
+
+  .hero-role-cursor {
+    color: var(--accent-1);
+    font-weight: 300;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(6, 182, 212, 0.25);
+  }
+
+  .btn-primary .btn-icon {
+    width: 18px; height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary:hover .btn-icon {
+    transform: translateX(4px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--overlay-border);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--overlay-border-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost .btn-icon {
+    width: 18px; height: 18px;
+  }
+
+  .hero-marquee {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .marquee-item {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--overlay);
+    border: 1px solid var(--overlay-border);
+    padding: 6px 14px;
+    border-radius: 50px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .marquee-item:hover {
+    opacity: 1;
+    color: var(--accent-1);
+    border-color: rgba(6, 182, 212, 0.2);
+    background: rgba(6, 182, 212, 0.05);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .hero-code-card {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 380px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hero-code-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .code-dots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .code-dots span {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .code-dots span:nth-child(1) { background: #ef4444; }
+  .code-dots span:nth-child(2) { background: #eab308; }
+  .code-dots span:nth-child(3) { background: #22c55e; }
+
+  .code-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .code-line { color: var(--text-muted); }
+  .code-line.indent { padding-left: 20px; }
+  .code-keyword { color: #c084fc; }
+  .code-fn { color: #60a5fa; }
+  .code-paren { color: #f472b6; }
+  .code-param { color: #fbbf24; }
+  .code-string { color: #34d399; }
+
+  .floating-tech {
+    position: absolute;
+    width: 52px; height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--float-bg);
+    border: 1px solid var(--float-border);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    animation: float 6s ease-in-out infinite;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .floating-tech:hover {
+    transform: scale(1.15) !important;
+    border-color: rgba(6, 182, 212, 0.3);
+  }
+
+  .tech-icon {
+    width: 26px; height: 26px;
+    color: var(--text-muted);
+  }
+
+  .floating-tech:hover .tech-icon {
+    color: var(--accent-1);
+  }
+
+  .t-1 { top: 5%; right: 5%; animation-delay: 0s; }
+  .t-2 { bottom: 20%; right: 0%; animation-delay: -2s; }
+  .t-3 { top: 30%; left: -5%; animation-delay: -4s; }
+  .t-4 { bottom: 5%; left: 10%; animation-delay: -1s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  .scroll-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(to bottom, var(--text-muted), transparent);
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @media (max-width: 900px) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-visual {
+      min-height: 300px;
+    }
+
+    .hero-code-card {
+      max-width: 100%;
+    }
+
+    .floating-tech {
+      width: 44px; height: 44px;
+    }
+
+    .tech-icon {
+      width: 22px; height: 22px;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-visual {
+      min-height: 240px;
+    }
+    .t-3 { display: none; }
+  }
+</style>
+
+<script>
+  const defaultRoles = [
+    "Desarrollador Web",
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack",
+  ];
+
+  let roles = [...(window.typewriterRoles || defaultRoles)];
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const el = document.getElementById("typewriter");
+
+  window.typewriterRoles = roles;
+
+  function typeEffect() {
+    if (!el) return;
+    const current = roles[roleIndex];
+    if (isDeleting) {
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    if (!isDeleting && charIndex === current.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 2000);
+      return;
+    }
+
+    if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      setTimeout(typeEffect, 400);
+      return;
+    }
+
+    setTimeout(typeEffect, isDeleting ? 40 : 80);
+  }
+
+  // Re-run on language change
+  const origSetLang = window.setLang;
+  const origApply = window.applyLanguage;
+  const orig = document.querySelectorAll;
+
+  typeEffect();
+
+  // Update typewriter roles when language changes
+  document.addEventListener("languageChanged", () => {
+    const newRoles = window.translations?.[document.documentElement.getAttribute("data-lang")]?.["hero.roles"];
+    if (newRoles) {
+      roles = newRoles;
+      window.typewriterRoles = newRoles;
+      roleIndex = 0;
+      charIndex = 0;
+      isDeleting = false;
+    }
+  });
+</script>

@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Services from "../components/Services.astro";
+import Projects from "../components/Projects.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import translations from "../i18n/translations.js";
+---
+
+<Layout>
+  <script define:vars={{ translations }}>
+    window.translations = translations;
+  </script>
+
+  <script>
+    // Apply saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
+    const savedLang = localStorage.getItem("lang") || "es";
+    document.documentElement.setAttribute("data-lang", savedLang);
+  </script>
+
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Projects />
+    <Skills />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  document
+    .querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger")
+    .forEach((el) => observer.observe(el));
+
+  // i18n for code lines and hero marquee
+  function applyCodeLanguage(lang) {
+    const t = window.translations?.[lang];
+    if (!t) return;
+
+    const line1 = document.getElementById("codeLine1");
+    const line2 = document.getElementById("codeLine2");
+    const line3 = document.getElementById("codeLine3");
+    if (line1) {
+      line1.innerHTML = `<span class="code-keyword">const</span> <span class="code-fn">${t["hero.code.line1"].split("(")[0].replace("const ", "").trim()}</span> = <span class="code-paren">(</span><span class="code-param">idea</span><span class="code-paren">)</span> <span class="code-keyword">=></span> <span class="code-paren">{</span>`;
+    }
+    if (line2) {
+      line2.innerHTML = `<span class="code-keyword">return</span> <span class="code-string">"${t["hero.code.line2"].replace('return "', "").replace('"', "").trim()}"</span>`;
+    }
+    if (line3) {
+      line3.innerHTML = `<span class="code-paren">}</span>`;
+    }
+
+    // Update marquee
+    const marqueeItems = t["hero.marquee"];
+    const marquee = document.getElementById("heroMarquee");
+    if (marquee && marqueeItems) {
+      marquee.innerHTML = marqueeItems.map((item) => `<span class="marquee-item">${item}</span>`).join("");
+    }
+  }
+
+  // Override setLang to also apply code language
+  const origSetLang2 = window.setLang;
+  document.addEventListener("languageChanged", () => {
+    const lang = document.documentElement.getAttribute("data-lang");
+    applyCodeLanguage(lang);
+  });
+
+  const langObserver = new MutationObserver(() => {
+    const lang = document.documentElement.getAttribute("data-lang");
+    applyCodeLanguage(lang);
+  });
+  langObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
+
+  // Apply initial
+  setTimeout(() => {
+    const lang = document.documentElement.getAttribute("data-lang");
+    applyCodeLanguage(lang);
+  }, 50);
+</script>
