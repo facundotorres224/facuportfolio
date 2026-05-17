@@ -36,7 +36,8 @@ const projects = [
     <div class="projects-track stagger">
       {projects.map((p, i) => (
         <article class="project-card">
-          <div class="project-visual" style="background-image: url({p.image});">
+          <div class="project-visual">
+            <img src={p.image} alt="" class="project-visual-img" />
             <div class="project-visual-overlay"></div>
             <div class="project-links">
               <a href={p.demo} class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Live demo">
@@ -90,13 +91,15 @@ const projects = [
   .project-visual {
     position: relative;
     height: 200px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  }
+
+  .project-visual-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .project-visual-overlay {
