@@ -3,26 +3,17 @@ import { Icon } from "astro-icon/components";
 
 const projects = [
   {
-    icon: "lucide:shopping-cart",
-    gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
-    demo: "#",
+    image: "/images/project_wecamp.png",
+    demo: "https://webcamp-mu.vercel.app",
     github: "#",
   },
   {
-    icon: "lucide:bar-chart-3",
-    gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
-    demo: "#",
+    image: "/images/proyect_planexa.png",
+    demo: "https://planexa-one.vercel.app",
     github: "#",
   },
   {
-    icon: "lucide:check-square",
-    gradient: "linear-gradient(135deg, #f472b6, #ec4899)",
-    demo: "#",
-    github: "#",
-  },
-  {
-    icon: "lucide:layers",
-    gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
+    image: "/images/proyect_fylstudios.png",
     demo: "#",
     github: "#",
   },
@@ -45,14 +36,8 @@ const projects = [
     <div class="projects-track stagger">
       {projects.map((p, i) => (
         <article class="project-card">
-          <div class="project-visual" style="background: {p.gradient};">
-            <div class="project-visual-bg">
-              <div class="project-shape shape-1"></div>
-              <div class="project-shape shape-2"></div>
-            </div>
-            <div class="project-icon-wrap">
-              <Icon name={p.icon} />
-            </div>
+          <div class="project-visual" style="background-image: url({p.image});">
+            <div class="project-visual-overlay"></div>
             <div class="project-links">
               <a href={p.demo} class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Live demo">
                 <Icon name="lucide:external-link" />
@@ -67,10 +52,9 @@ const projects = [
             <p class="project-desc" data-i18n={`projects.${i}.desc`}>Descripción del proyecto</p>
             <div class="project-tags" data-i18n-tags={`projects.${i}.tags`}>
               {[
-                ["React", "Node.js", "MongoDB"],
-                ["Next.js", "Python", "PostgreSQL"],
-                ["Vue", "Django", "TailwindCSS"],
-                ["Express", "Docker", "JWT"],
+                ["JavaScript", "Astro", "HTML", "CSS", "Node.js", "Supabase"],
+                ["Next.js", "React", "Supabase"],
+                ["PHP", "SQL", "JavaScript", "Tailwind CSS", "JSON"],
               ][i].map((tag) => (
                 <span class="project-tag">{tag}</span>
               ))}
@@ -107,65 +91,19 @@ const projects = [
     position: relative;
     height: 200px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-end;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
-  .project-visual-bg {
+  .project-visual-overlay {
     position: absolute;
     inset: 0;
-    opacity: 0.15;
-  }
-
-  .project-shape {
-    position: absolute;
-    border-radius: 50%;
-    animation: shapeFloat 8s ease-in-out infinite;
-  }
-
-  .shape-1 {
-    width: 120px; height: 120px;
-    background: white;
-    top: -20px; right: -20px;
-    opacity: 0.3;
-  }
-
-  .shape-2 {
-    width: 80px; height: 80px;
-    background: white;
-    bottom: -10px; left: -10px;
-    opacity: 0.2;
-    animation-delay: -4s;
-  }
-
-  @keyframes shapeFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(10px, -10px) scale(1.1); }
-  }
-
-  .project-icon-wrap {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    backdrop-filter: blur(4px);
-    color: white;
+    background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.15));
     z-index: 1;
-    transition: transform 0.4s ease;
-  }
-
-  .project-card:hover .project-icon-wrap {
-    transform: scale(1.1) rotate(-5deg);
-  }
-
-  .project-icon-wrap :global(svg) {
-    width: 26px;
-    height: 26px;
   }
 
   .project-links {
