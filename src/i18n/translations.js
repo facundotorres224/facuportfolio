@@ -70,7 +70,7 @@ const translations = {
     "contact.form.message": "Mensaje",
     "contact.form.message.placeholder": "Cuéntame sobre tu proyecto...",
     "contact.form.btn": "Enviar mensaje",
-    "contact.form.sent": "¡Enviado!",
+    "contact.form.sent": "Formulario enviado, facu se va a poner en contacto con vos dentro de poco, gracias por confiar",
     "contact.form.sending": "Enviando...",
 
     "about.tag": "Sobre mí",
@@ -184,7 +184,7 @@ const translations = {
     "contact.form.message": "Message",
     "contact.form.message.placeholder": "Tell me about your project...",
     "contact.form.btn": "Send message",
-    "contact.form.sent": "Sent!",
+    "contact.form.sent": "Message sent! Facu will get in touch with you soon. Thanks for trusting.",
     "contact.form.sending": "Sending...",
 
     "about.tag": "About me",
